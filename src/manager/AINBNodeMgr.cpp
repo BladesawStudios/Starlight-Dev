@@ -305,7 +305,7 @@ namespace application::manager
                 .mValueType = application::file::game::ainb::AINBFile::ValueType::Int
             });
             Def.mImmediateParameters.push_back(NodeDef::ParameterDef{
-                .mName = "IsDealyJudge",
+                .mName = "IsDelayJudge",
                 .mClass = "",
                 .mValueType = application::file::game::ainb::AINBFile::ValueType::Bool
             });
