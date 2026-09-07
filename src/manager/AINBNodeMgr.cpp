@@ -478,6 +478,15 @@ namespace application::manager
             Node.OutputParameters[(int)Def.mValueType].push_back(Entry);
         }
 
+        // A UserDefined node with no flow outputs can never sit in the flow graph - it can
+        // only ever be read for its value output(s), so it's a query/precondition node by
+        // construction, regardless of whether anything currently links to it. Built-in
+        // Element_* control-structure nodes also have no named flow outputs (they use child
+        // links instead), so this only applies to UserDefined node types.
+        if (Def->mNodeType == application::file::game::ainb::AINBFile::NodeTypes::UserDefined
+            && Def->mFlowOutputParameters.empty())
+            Node.Flags.push_back(application::file::game::ainb::AINBFile::FlagsStruct::IsPreconditionNode);
+
         AINB.Nodes.push_back(Node);
     }
 
